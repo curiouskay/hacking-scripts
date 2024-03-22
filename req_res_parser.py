@@ -21,8 +21,8 @@ def parse_burp_xml(input_file, parse_request, parse_response, output_file=None):
                         empty_line_index = request_lines.index("")
                         request_body = "\n".join(request_lines[empty_line_index +1:])
 
-                        print("\n\n")
-                        print(request_body)
+                        output.write("\n\n")
+                        output.write(request_body)
             
                 if parse_response:
                     response_lines = response.split("\n")
@@ -30,8 +30,8 @@ def parse_burp_xml(input_file, parse_request, parse_response, output_file=None):
                         empty_line_index = response_lines.index("")
                         response_body = "\n".join(response_lines[empty_line_index +1:])
 
-                        print("\n\n")
-                        print(response_body)
+                        output.write("\n\n")
+                        output.write(response_body)
 
         if output_file:
             print(f"Parsed results saved to '{output_file}'.")
@@ -44,9 +44,9 @@ def parse_burp_xml(input_file, parse_request, parse_response, output_file=None):
 def main():
     parser = argparse.ArgumentParser(description='Parse requests and responses from Burp Suite XML export.')
     parser.add_argument('-i', '--input', type=str, help='Path to the input XML file')
+    parser.add_argument('-o', '--output', type=str, help='Path to the output file (optional)')
     parser.add_argument('-q', '--request', action='store_true', help='Parse the request body')
     parser.add_argument('-s', '--response', action='store_true', help='Parse the response body')
-    parser.add_argument('-o', '--output', type=str, help='Path to the output file (optional)')
     
     args = parser.parse_args()
 
